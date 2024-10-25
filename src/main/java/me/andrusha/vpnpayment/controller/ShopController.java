@@ -1,12 +1,10 @@
 package me.andrusha.vpnpayment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import me.andrusha.vpnpayment.model.shop.Category;
 import me.andrusha.vpnpayment.model.shop.Duration;
 import me.andrusha.vpnpayment.model.shop.Product;
-import me.andrusha.vpnpayment.model.shop.Promocode;
 import me.andrusha.vpnpayment.service.CategoryService;
 import me.andrusha.vpnpayment.service.DurationService;
 import me.andrusha.vpnpayment.service.PromocodeService;
