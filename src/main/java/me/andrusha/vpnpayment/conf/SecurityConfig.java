@@ -34,21 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/registration").hasRole("USER")
-                .antMatchers("/auth/role").hasRole("USER")
-                .antMatchers("/auth/login").permitAll()
 
                 .antMatchers("/shop/products").permitAll()
-                .antMatchers(HttpMethod.GET, "/shop/product").permitAll()
-                .antMatchers(HttpMethod.POST, "/shop/product").hasRole("USER")
-                .antMatchers(HttpMethod.DELETE, "/shop/product").hasRole("USER")
-                .antMatchers(HttpMethod.PATCH, "/shop/product").hasRole("USER")
-
-                .antMatchers("/shop/duration").hasRole("USER")
-
-                .antMatchers("/shop/category").hasRole("USER")
-
-                .antMatchers("/shop/promocode").hasRole("USER")
 
                 .antMatchers("/shop/durations").permitAll()
 
