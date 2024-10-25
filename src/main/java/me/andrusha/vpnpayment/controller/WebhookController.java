@@ -13,8 +13,8 @@ import me.andrusha.vpnpayment.model.payment.Webhook;
 import me.andrusha.vpnpayment.model.request.ProductGiftRequest;
 import me.andrusha.vpnpayment.service.PaymentService;
 import me.andrusha.vpnpayment.service.ShopService;
-import me.andrusha.vpnpayment.utils.ex.AuthenticationException;
 
+import javax.naming.AuthenticationException;
 import java.io.IOException;
 
 
