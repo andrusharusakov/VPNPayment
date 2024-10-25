@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<button id="getButton">Отправить GET запрос</button>
+<p id="result"></p>
+
+<script>
+    const getButton = document.getElementById('getButton');
+    const resultParagraph = document.getElementById('result');
+
+    getButton.addEventListener('click', function() {
+        fetch('/api/v1/getPayment', {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: ""
+                })
+            .then(response => response.text())
+            .then(text => {
+                resultParagraph.textContent = text;
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                resultParagraph.textContent = 'Произошла ошибка.';
+            });
+    });
+</script>
+</body>
+</html>
