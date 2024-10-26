@@ -19,13 +19,17 @@ public class ShopService {
     public List<Product> getProducts() {
         return productRepository.findAllSortedByOrder();
     }
-
-    public Product getProductById(Long id){
+    public List<Product> getProductsByCategoryId(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+    public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public void saveProduct(Product product){ productRepository.save(product);}
-    public void deleteProduct(Product product){
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
+    public void deleteProduct(Product product) {
         productRepository.deleteById(product.getId());
     }
 

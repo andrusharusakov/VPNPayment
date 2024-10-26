@@ -13,7 +13,7 @@ import me.andrusha.vpnpayment.service.ShopService;
 import java.util.List;
 
 @RestController()
-@CrossOrigin(origins = {"http://localhost:3000" , "https://leafcity.vercel.app", "https://leafcity.ru"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://leafcity.vercel.app", "https://leafcity.ru"})
 @RequestMapping("/shop")
 public class ShopController {
     @Autowired
@@ -30,16 +30,25 @@ public class ShopController {
     public List<Product> getProducts() {
         return shopService.getProducts();
     }
+
+    @GetMapping("/products/category/{categoryId}")
+    @ResponseBody
+    public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
+        return shopService.getProductsByCategoryId(categoryId);
+    }
+
     @GetMapping("/product")
     @ResponseBody
-    public Product getProduct(@RequestParam  Long id) {
+    public Product getProduct(@RequestParam Long id) {
         return shopService.getProductById(id);
     }
+
     @GetMapping("/durations")
     @ResponseBody
     public List<Duration> getDurations() {
         return durationService.findAll();
     }
+
     @GetMapping("/categories")
     @ResponseBody
     public List<Category> getCategories() {
