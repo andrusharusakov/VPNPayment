@@ -13,6 +13,8 @@ public class Product {
     private float price;
     @ElementCollection
     private List<Information> about;
+    private int limitIp;
+    private int totalGb;
     private float sale;
     private int orderNum;
     private Boolean canApplyPromoCode = false;
@@ -26,8 +28,6 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "category_id")
     private Category category;
-
-
     public Product() {
     }
     @PreRemove
@@ -44,6 +44,22 @@ public class Product {
 
     public int getOrderNum() {
         return orderNum;
+    }
+
+    public int getLimitIp() {
+        return limitIp;
+    }
+
+    public void setLimitIp(int limitIp) {
+        this.limitIp = limitIp;
+    }
+
+    public int getTotalGb() {
+        return totalGb;
+    }
+
+    public void setTotalGb(int totalGb) {
+        this.totalGb = totalGb;
     }
 
     public void setOrderNum(int orderNum) {
