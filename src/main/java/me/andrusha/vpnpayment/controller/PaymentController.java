@@ -34,12 +34,12 @@ public class PaymentController {
         Payment newPay = new Payment();
         Product product = shopService.getProductById(userProductRequest.getProductId());
         float promocode = promocodeService.getDiscountByCode(userProductRequest.getPromocode());
-        if(product != null) {
+        if (product != null) {
             Long shortId = paymentService.getNextShortId();
             newPay.setShortId(shortId);
             Amount amount = new Amount(Float.toString(product.getRealPrice() * (1 - promocode)), "RUB");
             ArrayList<Item> items = new ArrayList<Item>();
-            items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity","full_payment" ));
+            items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity", "full_payment"));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
             newPay.setAmount(amount);
             newPay.setDescription("Платеж #" + shortId + " в магазине leafcity.ru/shop за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
@@ -52,23 +52,6 @@ public class PaymentController {
             response.put("confirmation_url", newPay.getConfirmation().getConfirmation_url());
             return ResponseEntity.ok(response);
         }
-        return  ResponseEntity.badRequest().body("продукт не найден!");
-    }
-    @GetMapping("/getPayments")
-    @ResponseBody
-    public List<Payment> getPayments() {
-        return paymentService.getPayments();
-    }
-
-    @GetMapping("/getPayment")
-    @ResponseBody
-    public Payment getPayment(@RequestParam  String id) {
-        return paymentService.getPayment(id);
-    }
-
-    @GetMapping("/getLastPayments")
-    @ResponseBody
-    public List<Map<String, Object>> getLastPayments() throws ParseException {
-        return paymentService.getLastPayments();
+        return ResponseEntity.badRequest().body("продукт не найден!");
     }
 }
