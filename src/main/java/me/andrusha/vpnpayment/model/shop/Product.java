@@ -18,6 +18,7 @@ public class Product {
     private float sale;
     private int orderNum;
     private Boolean canApplyPromoCode = false;
+    private Long inboundId;
     @Transient
     private float realPrice;
     @Column(columnDefinition = "TEXT")
@@ -136,5 +137,12 @@ public class Product {
 
     public void setRealPrice(float realPrice) {
         this.realPrice = realPrice;
+    }
+    public Long getInboundId() {
+        return inboundId;
+    }
+
+    public void setInboundId(Long inboundId) {
+        this.inboundId = inboundId;
     }
 }
