@@ -1,5 +1,6 @@
 package me.andrusha.vpnpayment.controller;
 
+import me.andrusha.vpnpayment.model.payment.PromoPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -26,9 +27,9 @@ public class WebhookController {
     PaymentService paymentService;
     @Autowired
     ShopService shopService;
-    private String dicsordUrl;
-    public WebhookController(@Value("${url.discordBot}") String discordUrl) {
-        this.dicsordUrl = discordUrl;
+    private String tgUrl;
+    public WebhookController(@Value("${url.tgBot}") String tgUrl) {
+        this.tgUrl = tgUrl;
     }
 
     @PostMapping("/getNotify")
@@ -51,9 +52,26 @@ public class WebhookController {
                     ProductGiftRequest request = new ProductGiftRequest(username, product);
                     HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
 
-                    restTemplate.postForObject(dicsordUrl, requestEntity, String.class);
+                    restTemplate.postForObject(tgUrl, requestEntity, String.class);
                 }
             }
+        }
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping("/getPromoNotify")
+    @ResponseBody
+    public ResponseEntity<String> getPromoNotify(@RequestBody PromoPayment promoPayment) throws AuthenticationException, IOException {
+        if(promoPayment != null){
+            var product = shopService.getProductById(promoPayment.getProductId());
+            var username = (String.valueOf(promoPayment.getUserId()));
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ProductGiftRequest request = new ProductGiftRequest(username, product);
+            HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
+
+            restTemplate.postForObject(tgUrl, requestEntity, String.class);
         }
         return ResponseEntity.ok("Ok");
     }
