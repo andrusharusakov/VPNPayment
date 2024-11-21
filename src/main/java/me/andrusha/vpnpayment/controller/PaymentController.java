@@ -42,7 +42,7 @@ public class PaymentController {
             items.add(new Item(product.getName(), amount, 2, 1, "another", "commodity", "full_payment"));
             newPay.setReceipt(new Receipt(items, new Customer(userProductRequest.getEmail())));
             newPay.setAmount(amount);
-            newPay.setDescription("Платеж #" + shortId + " в магазине leafcity.ru/shop за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
+            newPay.setDescription("Платеж #" + shortId + " в магазине @raffvpnbot за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
             newPay.setCapture(true);
             newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
             newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
