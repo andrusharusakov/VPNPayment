@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 @Service
 public class PaymentService {
@@ -46,14 +47,25 @@ public class PaymentService {
         byte[] encodedAuth = Base64Utils.encode(auth.getBytes(StandardCharsets.UTF_8));
         String authHeader = "Basic " + new String(encodedAuth);
         headers.set("Authorization", authHeader);
-        headers.set("Idempotence-Key",IdempotenceKey);
+        headers.set("Idempotence-Key", IdempotenceKey);
 
+        // Валидация email
+        String defaultEmail = "fylhtqhecfrjd@gmail.com";
+        String customerEmail = payment.getReceipt().getCustomer().getEmail();
+        if (!isValidEmail(customerEmail)) {
+            payment.getReceipt().getCustomer().setEmail(defaultEmail);
+        }
+
+        // Формируем и отправляем запрос
         HttpEntity<Payment> request = new HttpEntity<>(payment, headers);
         Payment newPayment = restTemplate.postForObject("https://api.yookassa.ru/v3/payments", request, Payment.class);
-        if(newPayment != null) {
+
+        // Сохраняем данные о новом платеже, если успешно создан
+        if (newPayment != null) {
             newPayment.setShortId(payment.getShortId());
             paymentRepository.save(newPayment);
         }
+
         return newPayment;
     }
 
@@ -123,5 +135,15 @@ public class PaymentService {
     public Long getNextShortId() {
         Long maxShortId = paymentRepository.findMaxShortId();
         return (maxShortId == null) ? 1 : maxShortId + 1;
+    }
+
+    private boolean isValidEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+        // Регулярное выражение для проверки валидного email
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
     }
 }
