@@ -14,7 +14,7 @@ public class Payment {
     private boolean paid;
     private boolean refundable;
     private boolean capture;
-    private boolean save_payment_method = true;
+    private boolean save_payment_method;
     @Embedded
     private Confirmation confirmation;
     @Embedded
