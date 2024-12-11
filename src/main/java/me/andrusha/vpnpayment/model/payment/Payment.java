@@ -124,7 +124,7 @@ public class Payment {
         return createdAt;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
