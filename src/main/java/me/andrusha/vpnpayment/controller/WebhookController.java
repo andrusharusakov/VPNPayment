@@ -1,6 +1,5 @@
 package me.andrusha.vpnpayment.controller;
 
-import me.andrusha.vpnpayment.model.payment.PaymentMethod;
 import me.andrusha.vpnpayment.model.payment.PromoPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +45,7 @@ public class WebhookController {
                 if (payment.getStatus().equals("succeeded")) {
                     var product = shopService.getProductById(payment.getMetadata().getProductId());
                     var username = payment.getMetadata().getUsername();
-                    var payment_id = payment.getPaymentMethod().getId();
+                    var payment_id = payment.getPaymentMethodId();
                     RestTemplate restTemplate = new RestTemplate();
                     HttpHeaders headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);

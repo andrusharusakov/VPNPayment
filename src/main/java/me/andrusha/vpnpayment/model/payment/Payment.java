@@ -9,7 +9,7 @@ public class Payment {
     private Long shortId;
     private String status;
     private String description;
-    private String created_at;
+    private String createdAt;
     private boolean test;
     private boolean paid;
     private boolean refundable;
@@ -25,15 +25,13 @@ public class Payment {
     private Amount amount;
     @Embedded
     private Receipt receipt;
-    @Embedded
-    private PaymentMethod paymentMethod;
     private String paymentMethodId;
 
-    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean savePaymentMethod, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, PaymentMethod paymentMethod, String paymentMethodId) {
+    public Payment(String id, String status, String description, String createdAt, boolean test, boolean paid, boolean refundable, boolean capture, boolean savePaymentMethod, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String paymentMethodId) {
         this.id = id;
         this.status = status;
         this.description = description;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.test = test;
         this.paid = paid;
         this.refundable = refundable;
@@ -43,7 +41,6 @@ public class Payment {
         this.recipient = recipient;
         this.amount = amount;
         this.receipt = receipt;
-        this.paymentMethod = paymentMethod;
         this.paymentMethodId = paymentMethodId;
         this.savePaymentMethod = savePaymentMethod;
     }
@@ -123,12 +120,12 @@ public class Payment {
         this.recipient = recipient;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+        this.createdAt = createdAt;
     }
 
     public boolean isTest() {
@@ -161,14 +158,6 @@ public class Payment {
 
     public void setMetadata(PaymentMeta metadata) {
         this.metadata = metadata;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
     }
 
     public String getPaymentMethodId() {
