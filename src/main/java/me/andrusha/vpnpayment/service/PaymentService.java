@@ -71,7 +71,7 @@ public class PaymentService {
 
     public List<Map<String, Object>> getLastPayments() throws ParseException {
         List<Payment> allPayments = paymentRepository.findByStatus("succeeded");
-        allPayments.sort(Comparator.comparing(Payment::getCreated_at).reversed());
+        allPayments.sort(Comparator.comparing(Payment::getCreatedAt).reversed());
         List<Payment> lastPayments = allPayments.subList(0, Math.min(10, allPayments.size()));
         List<Map<String, Object>> jsonResults = new ArrayList<>();
 
@@ -82,7 +82,7 @@ public class PaymentService {
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date createdDate = null;
 
-            createdDate = formatter.parse(payment.getCreated_at());
+            createdDate = formatter.parse(payment.getCreatedAt());
 
 
             if(createdDate != null) {
@@ -94,7 +94,7 @@ public class PaymentService {
                     paymentJson.put("username", payment.getMetadata().getUsername());
                     paymentJson.put("imageUrl", existingProduct.getImageUrl());
                     paymentJson.put("productName", existingProduct.getName());
-                    paymentJson.put("key", payment.getCreated_at());
+                    paymentJson.put("key", payment.getCreatedAt());
                     jsonResults.add(paymentJson);
                 }
             }
