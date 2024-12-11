@@ -14,6 +14,7 @@ public class Payment {
     private boolean paid;
     private boolean refundable;
     private boolean capture;
+    private boolean savePaymentMethod = true;
     @Embedded
     private Confirmation confirmation;
     @Embedded
@@ -24,8 +25,11 @@ public class Payment {
     private Amount amount;
     @Embedded
     private Receipt receipt;
+    @Embedded
+    private PaymentMethod paymentMethod;
+    private String paymentMethodId;
 
-    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt) {
+    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean savePaymentMethod, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, PaymentMethod paymentMethod, String paymentMethodId) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -39,6 +43,9 @@ public class Payment {
         this.recipient = recipient;
         this.amount = amount;
         this.receipt = receipt;
+        this.paymentMethod = paymentMethod;
+        this.paymentMethodId = paymentMethodId;
+        this.savePaymentMethod = savePaymentMethod;
     }
 
     public Payment() {
@@ -154,5 +161,29 @@ public class Payment {
 
     public void setMetadata(PaymentMeta metadata) {
         this.metadata = metadata;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getPaymentMethodId() {
+        return paymentMethodId;
+    }
+
+    public void setPaymentMethodId(String paymentMethodId) {
+        this.paymentMethodId = paymentMethodId;
+    }
+
+    public boolean isSavePaymentMethod() {
+        return savePaymentMethod;
+    }
+
+    public void setSavePaymentMethod(boolean savePaymentMethod) {
+        this.savePaymentMethod = savePaymentMethod;
     }
 }
