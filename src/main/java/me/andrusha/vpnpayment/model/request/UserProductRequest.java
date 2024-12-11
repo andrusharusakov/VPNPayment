@@ -6,13 +6,15 @@ public class UserProductRequest {
     private String promoCode;
     private Long productId;
     private String redirectUrl;
+    private String paymentId;
 
-    public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode) {
+    public UserProductRequest(String username, String email, Long productId, String redirectUrl, String promoCode, String paymentId) {
         this.username = username;
         this.email = email;
         this.productId = productId;
         this.redirectUrl = redirectUrl;
         this.promoCode = promoCode;
+        this.paymentId = paymentId;
     }
 
     public String getPromocode() {
@@ -56,5 +58,21 @@ public class UserProductRequest {
 
     public void setRedirectUrl(String redirectUrl) {
         this.redirectUrl = redirectUrl;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public String getPromoCode() {
+        return promoCode;
+    }
+
+    public void setPromoCode(String promoCode) {
+        this.promoCode = promoCode;
     }
 }

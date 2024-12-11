@@ -4,9 +4,10 @@ import me.andrusha.vpnpayment.model.shop.Product;
 
 public class ProductGiftRequest {
     private String username;
+    private String paymentId;
     private Product product;
 
-    public ProductGiftRequest(String username, Product product) {
+    public ProductGiftRequest(String username, String paymentId, Product product) {
         this.username = username;
         this.product = product;
     }
@@ -28,5 +29,13 @@ public class ProductGiftRequest {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 }
