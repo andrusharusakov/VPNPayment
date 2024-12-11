@@ -9,14 +9,12 @@ public class Payment {
     private Long shortId;
     private String status;
     private String description;
-    @Column(name = "created_at")
-    private String createdAt;
+    private String created_at;
     private boolean test;
     private boolean paid;
     private boolean refundable;
     private boolean capture;
-    @Column(name = "save_payment_method")
-    private boolean savePaymentMethod = true;
+    private boolean save_payment_method = true;
     @Embedded
     private Confirmation confirmation;
     @Embedded
@@ -29,11 +27,11 @@ public class Payment {
     private Receipt receipt;
     private String paymentMethodId;
 
-    public Payment(String id, String status, String description, String createdAt, boolean test, boolean paid, boolean refundable, boolean capture, boolean savePaymentMethod, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String paymentMethodId) {
+    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean save_payment_method, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String paymentMethodId) {
         this.id = id;
         this.status = status;
         this.description = description;
-        this.createdAt = createdAt;
+        this.created_at = created_at;
         this.test = test;
         this.paid = paid;
         this.refundable = refundable;
@@ -44,7 +42,7 @@ public class Payment {
         this.amount = amount;
         this.receipt = receipt;
         this.paymentMethodId = paymentMethodId;
-        this.savePaymentMethod = savePaymentMethod;
+        this.save_payment_method = save_payment_method;
     }
 
     public Payment() {
@@ -122,12 +120,12 @@ public class Payment {
         this.recipient = recipient;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public boolean isTest() {
@@ -170,11 +168,11 @@ public class Payment {
         this.paymentMethodId = paymentMethodId;
     }
 
-    public boolean isSavePaymentMethod() {
-        return savePaymentMethod;
+    public boolean isSave_payment_method() {
+        return save_payment_method;
     }
 
-    public void setSavePaymentMethod(boolean savePaymentMethod) {
-        this.savePaymentMethod = savePaymentMethod;
+    public void setSave_payment_method(boolean save_payment_method) {
+        this.save_payment_method = save_payment_method;
     }
 }
