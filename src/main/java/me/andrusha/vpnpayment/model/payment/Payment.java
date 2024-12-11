@@ -9,11 +9,13 @@ public class Payment {
     private Long shortId;
     private String status;
     private String description;
+    @Column(name = "created_at")
     private String createdAt;
     private boolean test;
     private boolean paid;
     private boolean refundable;
     private boolean capture;
+    @Column(name = "save_payment_method")
     private boolean savePaymentMethod = true;
     @Embedded
     private Confirmation confirmation;
