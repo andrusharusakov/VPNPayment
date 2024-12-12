@@ -160,19 +160,19 @@ public class Payment {
         this.metadata = metadata;
     }
 
-    public String getPaymentMethodId() {
+    public String getPayment_method_id() {
         return payment_method_id;
     }
 
-    public void setPaymentMethodId(String payment_method_id) {
+    public void setPayment_method_id(String payment_method_id) {
         this.payment_method_id = payment_method_id;
     }
 
-    public boolean isSavePaymentMethod() {
+    public boolean isSave_payment_method() {
         return save_payment_method;
     }
 
-    public void setSavePaymentMethod(boolean save_payment_method) {
+    public void setSave_payment_method(boolean save_payment_method) {
         this.save_payment_method = save_payment_method;
     }
 }
