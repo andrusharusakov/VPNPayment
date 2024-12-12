@@ -46,7 +46,7 @@ public class WebhookController {
                     var product = shopService.getProductById(payment.getMetadata().getProductId());
                     var username = payment.getMetadata().getUsername();
                     var paymentId = payment.getId();
-                    var type = payment.getMetadata().getType();
+                    var type = payment.getMetadata().getPaymentType();
                     RestTemplate restTemplate = new RestTemplate();
                     HttpHeaders headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);

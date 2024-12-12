@@ -7,13 +7,13 @@ public class PaymentMeta{
     private String username;
     private Long productId;
     private String metaDescription;
-    private String type;
+    private String paymentType;
 
-    public PaymentMeta(String username, Long productId, String metaDescription, String type) {
+    public PaymentMeta(String username, Long productId, String metaDescription, String paymentType) {
         this.username = username;
         this.productId = productId;
         this.metaDescription = metaDescription;
-        this.type = type;
+        this.paymentType = paymentType;
     }
 
     public PaymentMeta() {
@@ -43,11 +43,11 @@ public class PaymentMeta{
         this.metaDescription = metaDescription;
     }
 
-    public String getType() {
-        return type;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }
