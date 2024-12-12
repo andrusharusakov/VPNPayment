@@ -11,7 +11,8 @@ public class Product {
     private Long id;
     private String name;
     private float price;
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "product_id")
     private List<Information> about;
     private int limitIp;
     private int totalGb;
