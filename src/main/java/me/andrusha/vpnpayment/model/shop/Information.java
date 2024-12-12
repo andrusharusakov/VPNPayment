@@ -1,26 +1,11 @@
 package me.andrusha.vpnpayment.model.shop;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
-@Entity
+@Embeddable
 public class Information {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Автоинкремент
-    private Long id;
-
     private String name;
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -36,5 +21,5 @@ public class Information {
 
     public void setDescription(String description) {
         this.description = description;
-    }
+        }
 }
