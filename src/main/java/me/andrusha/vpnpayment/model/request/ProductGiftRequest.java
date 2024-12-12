@@ -4,12 +4,15 @@ import me.andrusha.vpnpayment.model.shop.Product;
 
 public class ProductGiftRequest {
     private String username;
-    private String paymentId;
     private Product product;
+    private String paymentId;
+    private String type;
 
-    public ProductGiftRequest(String username, String paymentId, Product product) {
+    public ProductGiftRequest(String username, Product product, String paymentId, String type) {
         this.username = username;
         this.product = product;
+        this.paymentId = paymentId;
+        this.type = type;
     }
 
     public ProductGiftRequest() {
@@ -37,5 +40,13 @@ public class ProductGiftRequest {
 
     public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

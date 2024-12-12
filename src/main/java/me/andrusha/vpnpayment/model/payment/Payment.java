@@ -25,9 +25,9 @@ public class Payment {
     private Amount amount;
     @Embedded
     private Receipt receipt;
-    private String paymentMethodId;
+    private String payment_method_id;
 
-    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean save_payment_method, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String paymentMethodId) {
+    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean save_payment_method, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String payment_method_id) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -41,7 +41,7 @@ public class Payment {
         this.recipient = recipient;
         this.amount = amount;
         this.receipt = receipt;
-        this.paymentMethodId = paymentMethodId;
+        this.payment_method_id = payment_method_id;
         this.save_payment_method = save_payment_method;
     }
 
@@ -161,18 +161,18 @@ public class Payment {
     }
 
     public String getPaymentMethodId() {
-        return paymentMethodId;
+        return payment_method_id;
     }
 
-    public void setPaymentMethodId(String paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
+    public void setPaymentMethodId(String payment_method_id) {
+        this.payment_method_id = payment_method_id;
     }
 
-    public boolean isSave_payment_method() {
+    public boolean isSavePaymentMethod() {
         return save_payment_method;
     }
 
-    public void setSave_payment_method(boolean save_payment_method) {
+    public void setSavePaymentMethod(boolean save_payment_method) {
         this.save_payment_method = save_payment_method;
     }
 }

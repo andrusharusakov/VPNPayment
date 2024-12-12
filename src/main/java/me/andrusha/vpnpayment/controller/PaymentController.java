@@ -44,8 +44,8 @@ public class PaymentController {
             newPay.setAmount(amount);
             newPay.setDescription("Платеж #" + shortId + " в магазине @raffvpnbot за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
             newPay.setCapture(true);
-            newPay.setSave_payment_method(true);
-            newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
+            newPay.setSavePaymentMethod(true);
+            newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName(), "standart"));
             newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
             newPay = paymentService.createPayment(newPay);
 
@@ -72,8 +72,7 @@ public class PaymentController {
             newPay.setAmount(amount);
             newPay.setDescription("Автоплатеж #" + shortId + " в магазине @raffvpnbot за заказ товара " + product.getName() + " пользователю " + userProductRequest.getUsername());
             newPay.setCapture(true);
-            newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName()));
-            newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
+            newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName(), "auto"));
             newPay.setPaymentMethodId(userProductRequest.getPaymentId());
             paymentService.createPayment(newPay);
             return ResponseEntity.ok("Ok");
