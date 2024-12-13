@@ -74,7 +74,6 @@ public class PaymentController {
             newPay.setCapture(true);
             newPay.setMetadata(new PaymentMeta(userProductRequest.getUsername(), product.getId(), product.getName(), "auto"));
             newPay.setPayment_method_id(userProductRequest.getPaymentId());
-            newPay.setConfirmation(new Confirmation("redirect", "", userProductRequest.getRedirectUrl()));
             paymentService.createPayment(newPay);
             return ResponseEntity.ok("Ok");
         }

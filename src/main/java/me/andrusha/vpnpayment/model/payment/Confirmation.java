@@ -7,9 +7,10 @@ public class Confirmation {
     private String type;
     private String confirmation_token;
     private String confirmation_url;
-    private boolean enforce = false;
-    private  String  return_url;
 
+    // Используем тип-обёртку Boolean вместо примитива boolean
+    private Boolean enforce;
+    private String return_url;
 
     public Confirmation(String type, String confirmation_token, String confirmation_url, String return_url) {
         this.type = type;
@@ -39,11 +40,11 @@ public class Confirmation {
         this.confirmation_url = confirmation_url;
     }
 
-    public boolean getEnforce() {
+    public Boolean getEnforce() {
         return enforce;
     }
 
-    public void setEnforce(boolean enforce) {
+    public void setEnforce(Boolean enforce) {
         this.enforce = enforce;
     }
 
