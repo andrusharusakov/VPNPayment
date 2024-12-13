@@ -60,4 +60,23 @@ public class WebhookController {
         }
         return ResponseEntity.ok("Ok");
     }
+
+    @PostMapping("/getPromoNotify")
+    @ResponseBody
+    public ResponseEntity<String> getPromoNotify(@RequestBody Webhook webhook) throws AuthenticationException, IOException {
+        Payment payment =  webhook.getObject();
+        var product = shopService.getProductById(payment.getMetadata().getProductId());
+        var username = payment.getMetadata().getUsername();
+        var paymentId = payment.getId();
+        var type = payment.getMetadata().getPaymentType();
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ProductGiftRequest request = new ProductGiftRequest(username, product, paymentId, type);
+        HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
+
+        restTemplate.postForObject(tgUrl, requestEntity, String.class);
+        return ResponseEntity.ok("Ok");
+    }
 }
