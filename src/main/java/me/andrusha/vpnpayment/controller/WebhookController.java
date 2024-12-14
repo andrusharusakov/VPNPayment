@@ -1,6 +1,7 @@
 package me.andrusha.vpnpayment.controller;
 
 import me.andrusha.vpnpayment.model.payment.Payment;
+import me.andrusha.vpnpayment.model.payment.PromoPayment;
 import me.andrusha.vpnpayment.model.payment.Webhook;
 import me.andrusha.vpnpayment.model.request.ProductGiftRequest;
 import me.andrusha.vpnpayment.service.PaymentService;
@@ -85,13 +86,17 @@ public class WebhookController {
 
     @PostMapping("/getPromoNotify")
     @ResponseBody
-    public ResponseEntity<String> getPromoNotify(@RequestBody Webhook webhook) throws AuthenticationException, IOException {
-        Payment payment = webhook.getObject();
-        if (payment == null) {
-            return ResponseEntity.ok("No payment object");
+    public ResponseEntity<String> getPromoNotify(@RequestBody PromoPayment promoPayment) throws AuthenticationException, IOException {
+        if(promoPayment != null){
+            var product = shopService.getProductById(promoPayment.getProductId());
+            var username = (String.valueOf(promoPayment.getUserId()));
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ProductGiftRequest request = new ProductGiftRequest(username, product, null, "standart");
+            HttpEntity<ProductGiftRequest> requestEntity = new HttpEntity<>(request, headers);
+            restTemplate.postForObject(tgUrl, requestEntity, String.class);
         }
-
-        processSucceededPayment(payment);
         return ResponseEntity.ok("Ok");
     }
 
