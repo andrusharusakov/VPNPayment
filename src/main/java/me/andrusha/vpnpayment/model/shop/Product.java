@@ -29,6 +29,7 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "category_id")
     private Category category;
+    private double share;
     public Product() {
     }
     @PreRemove
@@ -144,5 +145,13 @@ public class Product {
 
     public void setInboundId(Long inboundId) {
         this.inboundId = inboundId;
+    }
+
+    public double getShare() {
+        return share;
+    }
+
+    public void setShare(double share) {
+        this.share = share;
     }
 }
