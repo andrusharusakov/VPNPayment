@@ -54,4 +54,4 @@ public class ShopController {
 //    public List<Category> getCategories() {
 //        return categoryService.findAll();
 //    }
-//}
+}
