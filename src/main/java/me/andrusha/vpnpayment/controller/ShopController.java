@@ -31,11 +31,11 @@ public class ShopController {
         return shopService.getProducts();
     }
 
-    @GetMapping("/products/category/{categoryId}")
-    @ResponseBody
-    public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
-        return shopService.getProductsByCategoryId(categoryId);
-    }
+//    @GetMapping("/products/category/{categoryId}")
+//    @ResponseBody
+//    public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
+//        return shopService.getProductsByCategoryId(categoryId);
+//    }
 
     @GetMapping("/product")
     @ResponseBody
@@ -49,9 +49,9 @@ public class ShopController {
         return durationService.findAll();
     }
 
-    @GetMapping("/categories")
-    @ResponseBody
-    public List<Category> getCategories() {
-        return categoryService.findAll();
-    }
-}
+//    @GetMapping("/categories")
+//    @ResponseBody
+//    public List<Category> getCategories() {
+//        return categoryService.findAll();
+//    }
+//}
