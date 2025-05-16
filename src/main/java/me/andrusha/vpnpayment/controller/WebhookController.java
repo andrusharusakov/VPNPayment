@@ -121,4 +121,29 @@ public class WebhookController {
 
         restTemplate.postForObject(tgUrl, requestEntity, String.class);
     }
+
+    private void processCanceledPayment(Payment payment) {
+        // Получаем пользователя из метаданных
+        String username = payment.getMetadata() != null
+            ? payment.getMetadata().getUsername()
+            : "unknown";
+    
+        // Получаем причину отказа
+        String reason = payment.getCancellationDetails() != null
+            ? payment.getCancellationDetails().getReason()
+            : "no reason provided";
+    
+        // Формируем тело запроса (можно расширить DTO, если надо)
+        Map<String, String> payload = new HashMap<>();
+        payload.put("username", username);
+        payload.put("reason", reason);
+    
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Map<String,String>> requestEntity = new HttpEntity<>(payload, headers);
+    
+        // Отправляем в ваш Telegram-бот
+        restTemplate.postForObject(tgUrl, requestEntity, String.class);
+    }
 }
