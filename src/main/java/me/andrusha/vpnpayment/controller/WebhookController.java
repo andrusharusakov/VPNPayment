@@ -40,6 +40,10 @@ public class WebhookController {
         }
 
         Payment payment = webhook.getObject();
+        if ("canceled".equals(payment.getStatus())) {
+            processCanceledPayment(payment);
+            return ResponseEntity.ok("Ok");
+        }
         Payment existingPayment = paymentService.getPayment(payment.getId());
 
         // Если платеж не найден в БД
