@@ -1,86 +1,88 @@
 package me.andrusha.vpnpayment.model.payment;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @Entity
+// Игнорировать лишние поля из JSON, чтобы не было ошибок
+@JsonIgnoreProperties(ignoreUnknown = true)
+// Применить стратегию snake_case → camelCase
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Payment {
     @Id
     private String id;
     private Long shortId;
     private String status;
     private String description;
-    private String created_at;
+    private String createdAt;
     private boolean test;
     private boolean paid;
     private boolean refundable;
     private boolean capture;
-    private boolean save_payment_method;
+    private boolean savePaymentMethod;
+
     @Embedded
     private Confirmation confirmation;
+
     @Embedded
     private PaymentMeta metadata;
+
     @Embedded
     private Recipient recipient;
+
     @Embedded
     private Amount amount;
+
     @Embedded
     private Receipt receipt;
-    private String payment_method_id;
+
+    private String paymentMethodId;
+
     @Embedded
     private CancellationDetails cancellationDetails;
-    
-    public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean save_payment_method, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String payment_method_id) {
+
+    public Payment() {}
+
+    public Payment(
+        String id,
+        String status,
+        String description,
+        String createdAt,
+        boolean test,
+        boolean paid,
+        boolean refundable,
+        boolean capture,
+        boolean savePaymentMethod,
+        Confirmation confirmation,
+        PaymentMeta metadata,
+        Recipient recipient,
+        Amount amount,
+        Receipt receipt,
+        String paymentMethodId
+    ) {
         this.id = id;
         this.status = status;
         this.description = description;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.test = test;
         this.paid = paid;
         this.refundable = refundable;
         this.capture = capture;
+        this.savePaymentMethod = savePaymentMethod;
         this.confirmation = confirmation;
         this.metadata = metadata;
         this.recipient = recipient;
         this.amount = amount;
         this.receipt = receipt;
-        this.payment_method_id = payment_method_id;
-        this.save_payment_method = save_payment_method;
+        this.paymentMethodId = paymentMethodId;
     }
 
-    public Payment() {
-    }
-
-    public CancellationDetails getCancellationDetails() {
-        return cancellationDetails;
-    }
-
-    public void setCancellationDetails(CancellationDetails cancellationDetails) {
-        this.cancellationDetails = cancellationDetails;
-    }
-
-    public Receipt getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
-
-    public Confirmation getConfirmation() {
-        return confirmation;
-    }
-
-    public void setConfirmation(Confirmation confirmation) {
-        this.confirmation = confirmation;
-    }
-
-    public boolean isCapture() {
-        return capture;
-    }
-
-    public void setCapture(boolean capture) {
-        this.capture = capture;
-    }
+    // --- getters & setters ---
 
     public String getId() {
         return id;
@@ -106,14 +108,6 @@ public class Payment {
         this.status = status;
     }
 
-    public Amount getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Amount amount) {
-        this.amount = amount;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -122,20 +116,12 @@ public class Payment {
         this.description = description;
     }
 
-    public Recipient getRecipient() {
-        return recipient;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setRecipient(Recipient recipient) {
-        this.recipient = recipient;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public boolean isTest() {
@@ -162,6 +148,30 @@ public class Payment {
         this.refundable = refundable;
     }
 
+    public boolean isCapture() {
+        return capture;
+    }
+
+    public void setCapture(boolean capture) {
+        this.capture = capture;
+    }
+
+    public boolean isSavePaymentMethod() {
+        return savePaymentMethod;
+    }
+
+    public void setSavePaymentMethod(boolean savePaymentMethod) {
+        this.savePaymentMethod = savePaymentMethod;
+    }
+
+    public Confirmation getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(Confirmation confirmation) {
+        this.confirmation = confirmation;
+    }
+
     public PaymentMeta getMetadata() {
         return metadata;
     }
@@ -170,19 +180,43 @@ public class Payment {
         this.metadata = metadata;
     }
 
-    public String getPayment_method_id() {
-        return payment_method_id;
+    public Recipient getRecipient() {
+        return recipient;
     }
 
-    public void setPayment_method_id(String payment_method_id) {
-        this.payment_method_id = payment_method_id;
+    public void setRecipient(Recipient recipient) {
+        this.recipient = recipient;
     }
 
-    public boolean isSave_payment_method() {
-        return save_payment_method;
+    public Amount getAmount() {
+        return amount;
     }
 
-    public void setSave_payment_method(boolean save_payment_method) {
-        this.save_payment_method = save_payment_method;
+    public void setAmount(Amount amount) {
+        this.amount = amount;
+    }
+
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
+    }
+
+    public String getPaymentMethodId() {
+        return paymentMethodId;
+    }
+
+    public void setPaymentMethodId(String paymentMethodId) {
+        this.paymentMethodId = paymentMethodId;
+    }
+
+    public CancellationDetails getCancellationDetails() {
+        return cancellationDetails;
+    }
+
+    public void setCancellationDetails(CancellationDetails cancellationDetails) {
+        this.cancellationDetails = cancellationDetails;
     }
 }
