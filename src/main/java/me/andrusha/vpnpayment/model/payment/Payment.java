@@ -26,7 +26,9 @@ public class Payment {
     @Embedded
     private Receipt receipt;
     private String payment_method_id;
-
+    @Embedded
+    private CancellationDetails cancellationDetails;
+    
     public Payment(String id, String status, String description, String created_at, boolean test, boolean paid, boolean refundable, boolean capture, boolean save_payment_method, Confirmation confirmation, PaymentMeta metadata, Recipient recipient, Amount amount, Receipt receipt, String payment_method_id) {
         this.id = id;
         this.status = status;
@@ -46,6 +48,14 @@ public class Payment {
     }
 
     public Payment() {
+    }
+
+    public CancellationDetails getCancellationDetails() {
+        return cancellationDetails;
+    }
+
+    public void setCancellationDetails(CancellationDetails cancellationDetails) {
+        this.cancellationDetails = cancellationDetails;
     }
 
     public Receipt getReceipt() {
